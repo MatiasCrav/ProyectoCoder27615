@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from datetime import datetime
 from django.template import Template, Context
-# Importo settings para poder usar una variable del archivo settings.py
-from django.conf import settings
+# Importo la variable BASE_DIR de settings.py
+from ProyectoCoder27615.settings import BASE_DIR
 
 
 def saludo(request):
@@ -31,7 +31,7 @@ def con_plantilla(request):
 
     # Uso una variable del archivo settings.py que tiene la ruta al proyecto. No
     # es exactamente un string y puedo concatenarle texto con la "/"
-    mi_html = open(settings.BASE_DIR / "ProyectoCoder27615/plantillas/plantilla.html")
+    mi_html = open(BASE_DIR / "ProyectoCoder27615/plantillas/plantilla.html")
     # Creo una plantilla con los datos del html
     plantilla = Template(mi_html.read())
     mi_html.close()
