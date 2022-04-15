@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from datetime import datetime
 from django.template import Template, Context
-# Importo settings para poder usar una variable del archivo settings.py
+# Importo la variable BASE_DIR de settings.py
 from ProyectoCoder27615.settings import BASE_DIR
 
 
