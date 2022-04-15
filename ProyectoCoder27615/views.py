@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from datetime import datetime
-from django.template import Template, Context
+from django.template import Template, Context, loader
+
 # Importo la variable BASE_DIR de settings.py
 from ProyectoCoder27615.settings import BASE_DIR
 
@@ -38,7 +39,28 @@ def con_plantilla(request):
 
     # Necesito un "contexto" para poder renderizar una plantilla a algo que se
     # pueda mostrar.
-    mi_contexto = Context(plantilla)
+    mi_contexto = Context()
+    documento = plantilla.render(mi_contexto)
+
+    return HttpResponse(documento)
+
+
+def probando_template(request):
+    mi_html = open(BASE_DIR / "ProyectoCoder27615/plantillas/probando.html")
+    plantilla = Template(mi_html.read())
+    mi_html.close()
+
+    mi_contexto = Context({"nombre": "Pepe", "apellido": "Perez"})
+    documento = plantilla.render(mi_contexto)
+
+    return HttpResponse(documento)
+
+
+def notas(request):
+    notas = [2, 2, 3, 7, 2, 5]
+    plantilla = loader.get_template("notas.html")
+
+    mi_contexto = {"notas": notas}
     documento = plantilla.render(mi_contexto)
 
     return HttpResponse(documento)

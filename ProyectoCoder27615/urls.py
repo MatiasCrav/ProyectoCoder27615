@@ -21,7 +21,12 @@ from ProyectoCoder27615.views import (
     saludo_con_nombre,
     anio_nacimiento,
     con_plantilla,
+    probando_template,
+    notas,
 )
+
+# views de AppCoder
+from AppCoder.views import crear_estudiante, listar_estudiantes
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -30,4 +35,9 @@ urlpatterns = [
     path("hoy/", dia_de_hoy),
     path("anio/<int:edad>", anio_nacimiento),
     path("", con_plantilla),
+    path("probando/", probando_template),
+    path("notas/", notas),
+    # urls de AppCoder. Proximamente las pasaremos a un urls.py propio de AppCoder.
+    path("AppCoder/crear_juan/", crear_estudiante),
+    path("AppCoder/listar_estudiantes/", listar_estudiantes),
 ]
