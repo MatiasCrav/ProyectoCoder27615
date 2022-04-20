@@ -1,9 +1,12 @@
-# render es otra forma de cargar templates que veremos en próximas clases
-# from django.shortcuts import render
+from django.shortcuts import render
 
 from AppCoder.models import Estudiante
 from django.http import HttpResponse
 from django.template import loader
+
+
+def inicio(request):
+    return render(request, "AppCoder/inicio.html")
 
 
 def crear_estudiante(request):
@@ -24,3 +27,24 @@ def listar_estudiantes(request):
     documento = plantilla.render(mi_contexto)
 
     return HttpResponse(documento)
+
+
+def curso(request):
+    return render(request, "AppCoder/curso.html")
+
+
+def entregable(request):
+    return render(request, "AppCoder/entregable.html")
+
+
+def estudiante(request):
+    return render(request, "AppCoder/estudiante.html")
+
+
+def profesor(request):
+    return render(request, "AppCoder/profesor.html")
+
+
+# Les dejo una plantilla genérica con bootstrap
+def plantilla(request):
+    return render(request, "layout.html")
