@@ -29,22 +29,22 @@ def listar_estudiantes(request):
     return HttpResponse(documento)
 
 
-def curso(request):
-    return render(request, "AppCoder/curso.html")
+def cursos(request):
+    return render(request, "AppCoder/cursos.html")
 
 
-def entregable(request):
-    return render(request, "AppCoder/entregable.html")
+def entregables(request):
+    return render(request, "AppCoder/entregables.html")
 
 
-def estudiante(request):
-    return render(request, "AppCoder/estudiante.html")
+def estudiantes(request):
+    return render(request, "AppCoder/estudiantes.html")
 
 
-def profesor(request):
-    return render(request, "AppCoder/profesor.html")
+def profesores(request):
+    return render(request, "AppCoder/profesores.html")
 
 
 # Les dejo una plantilla genérica con bootstrap
 def plantilla(request):
-    return render(request, "layout.html")
+    return render(request, "AppCoder/layout.html")
