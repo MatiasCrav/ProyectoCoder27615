@@ -32,7 +32,7 @@ def con_plantilla(request):
 
     # Uso una variable del archivo settings.py que tiene la ruta al proyecto. No
     # es exactamente un string y puedo concatenarle texto con la "/"
-    mi_html = open(BASE_DIR / "ProyectoCoder27615/plantillas/plantilla.html")
+    mi_html = open(BASE_DIR / "ProyectoCoder27615/templates/plantilla.html")
     # Creo una plantilla con los datos del html
     plantilla = Template(mi_html.read())
     mi_html.close()
@@ -46,7 +46,7 @@ def con_plantilla(request):
 
 
 def probando_template(request):
-    mi_html = open(BASE_DIR / "ProyectoCoder27615/plantillas/probando.html")
+    mi_html = open(BASE_DIR / "ProyectoCoder27615/templates/probando.html")
     plantilla = Template(mi_html.read())
     mi_html.close()
 
