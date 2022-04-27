@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from AppCoder.models import Curso, Estudiante
 from django.http import HttpResponse
@@ -54,6 +54,6 @@ def crear_curso(request):
     if request.method == "POST":
         curso = Curso(nombre=request.POST["curso"], comision=request.POST["camada"])
         curso.save()
-        return render(request, "AppCoder/cursos.html")
+        return redirect("Cursos")
 
     return render(request, "AppCoder/formCurso.html")
