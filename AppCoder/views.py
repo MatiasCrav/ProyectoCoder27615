@@ -54,7 +54,7 @@ def plantilla(request):
 def crear_curso(request):
     if request.method == "POST":
         mi_formulario = FormCurso(request.POST)
-        
+
         # .is_valid() chequea que los datos recibidos son validos para los campos
         # definidos en la clase del form. En la diapositiva hay un error: .is_valid()
         # es una función y se llama con () al final.
@@ -69,3 +69,16 @@ def crear_curso(request):
 
     mi_formulario = FormCurso()
     return render(request, "AppCoder/formCurso.html", {"form": mi_formulario})
+
+
+def buscar_curso(request):
+    if request.GET.get("comision"):
+        comision = request.GET["comision"]
+        cursos = Curso.objects.filter(comision__icontains=comision)
+        return render(
+            request,
+            "AppCoder/resultadosBusquedaCurso.html",
+            {"cursos": cursos, "comision": comision},
+        )
+
+    return render(request, "AppCoder/buscarCurso.html")

@@ -1,0 +1,24 @@
+{% extends 'AppCoder/layout.html' %}
+{% load static %}
+
+{% block contenido %}
+    <h1 class="text-center">
+        Busqueda cursos "{{ comision }}"
+    </h1>
+    <div class="my-4 col-md-7 col-lg-6 mx-auto">
+        <div class="mt-3 card bg-light p-3">
+            <!-- ul = 'unordered list', lista sin orden -->
+            <ul>
+                <!-- si hay cursos los muestro, sino aviso -->
+                {% if cursos %}
+                    {% for curso in cursos %}
+                        <!-- li = 'list item', item de lista -->
+                        <li>{{ curso }}</li>
+                    {% endfor %}    
+                {% else %}
+                    <h6>No hay cursos que coincidan con la búsqueda</h6>
+                {% endif %}    
+            </ul>
+        </div>
+    </div>
+{% endblock contenido %}

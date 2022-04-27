@@ -1,0 +1,23 @@
+{% extends 'AppCoder/layout.html' %}
+{% load static %}
+
+{% block contenido %}
+    <h1 class="text-center">
+        Buscar curso
+    </h1>
+    <form action="{% url 'BuscarCurso' %}" method="GET"
+          class="d-flex col-md-7 col-lg-6 mx-auto mt-3"
+    > 
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Comision.."
+          aria-label="Search"
+          name="comision"
+          required
+        />
+        <button class="btn btn-outline-success" type="submit">
+          Buscar
+        </button>
+      </form>
+{% endblock contenido %}
