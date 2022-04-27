@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from AppCoder.models import Curso, Estudiante
 from django.http import HttpResponse
 from django.template import loader
+from .forms import FormCurso
 
 
 def inicio(request):
@@ -52,8 +53,19 @@ def plantilla(request):
 
 def crear_curso(request):
     if request.method == "POST":
-        curso = Curso(nombre=request.POST["curso"], comision=request.POST["camada"])
-        curso.save()
-        return redirect("Cursos")
+        mi_formulario = FormCurso(request.POST)
+        
+        # .is_valid() chequea que los datos recibidos son validos para los campos
+        # definidos en la clase del form. En la diapositiva hay un error: .is_valid()
+        # es una función y se llama con () al final.
+        if mi_formulario.is_valid():
+            informacion = mi_formulario.cleaned_data
+            curso = Curso(nombre=informacion["curso"], comision=informacion["camada"])
+            curso.save()
+            return redirect("Cursos")
+        else:
+            # Hubo algún error
+            ...
 
-    return render(request, "AppCoder/formCurso.html")
+    mi_formulario = FormCurso()
+    return render(request, "AppCoder/formCurso.html", {"form": mi_formulario})
