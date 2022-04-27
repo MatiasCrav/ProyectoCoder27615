@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from AppCoder.models import Estudiante
+from AppCoder.models import Curso, Estudiante
 from django.http import HttpResponse
 from django.template import loader
 
@@ -48,3 +48,12 @@ def profesores(request):
 # Les dejo una plantilla genérica con bootstrap
 def plantilla(request):
     return render(request, "AppCoder/layout.html")
+
+
+def crear_curso(request):
+    if request.method == "POST":
+        curso = Curso(nombre=request.POST["curso"], comision=request.POST["camada"])
+        curso.save()
+        return render(request, "AppCoder/cursos.html")
+
+    return render(request, "AppCoder/formCurso.html")
