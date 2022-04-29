@@ -8,15 +8,15 @@
 
     <div class="my-4 col-md-7 col-lg-6 mx-auto">
         <div class="mt-3 card bg-light p-3">
-            
+
             {% if not estudiantes %}            
                 <h5>Aca eventualmente mostraré los estudiantes</h5>
             {% endif %}
-                
+
             {% for estudiante in estudiantes %}
                 <h5>{{ estudiante }}</h5>
             {% endfor %}
-            
+
         </div>
     </div>
 {% endblock contenido %}
