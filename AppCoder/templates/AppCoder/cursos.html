@@ -15,16 +15,16 @@
             {% endif %}
                 
             {% for curso in cursos %}
-                <div class="d-flex justify-content-between my-2">
-                    <h5>{{ curso }}</h5>
+                <div class="d-flex justify-content-between my-2 align-items-center">
+                    <h5 class="m-0">{{ curso }}</h5>
                     <div>
                         <a href="{% url 'EditarCurso' curso.nombre %}"
-                        class="btn btn-warning">
-                        Editar
+                           class="btn btn-warning">
+                            Editar
                         </a>
                         <a href="{% url 'EliminarCurso' curso.nombre %}"
-                        class="btn btn-danger">
-                        Borrar
+                           class="btn btn-danger">
+                            Borrar
                         </a>
                     </div>
                 </div>
