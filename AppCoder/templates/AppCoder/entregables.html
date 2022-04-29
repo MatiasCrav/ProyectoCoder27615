@@ -5,4 +5,18 @@
     <h1 class="text-center">
         Entregables
     </h1>
+
+    <div class="my-4 col-md-7 col-lg-6 mx-auto">
+        <div class="mt-3 card bg-light p-3">
+            
+            {% if not entregables %}            
+                <h5>Aca eventualmente mostraré los entregables</h5>
+            {% endif %}
+                
+            {% for entregable in entregables %}
+                <h5>{{ entregable }}</h5>
+            {% endfor %}
+            
+        </div>
+    </div>
 {% endblock contenido %}

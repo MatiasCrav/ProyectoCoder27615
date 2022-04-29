@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from AppCoder.models import Curso, Estudiante
+from AppCoder.models import Curso, Estudiante, Profesor, Entregable
 from django.http import HttpResponse
 from django.template import loader
 from .forms import FormCurso
@@ -10,40 +10,24 @@ def inicio(request):
     return render(request, "AppCoder/inicio.html")
 
 
-def crear_estudiante(request):
-    estudiante = Estudiante(
-        nombre="Juancito", apellido="Perez", email="juan.perez@gmail.com"
-    )
-    # Con .save() guardamos la instancia en la bd.
-    estudiante.save()
-    return HttpResponse(f"Se creó a {estudiante.nombre} {estudiante.apellido}")
-
-
-def listar_estudiantes(request):
-    # Obtengo todos los estudiantes
-    estudiantes = Estudiante.objects.all()
-    plantilla = loader.get_template("estudiantes.html")
-    # Agrego los estudiantes al contexto para usarlos en el html
-    mi_contexto = {"estudiantes": estudiantes}
-    documento = plantilla.render(mi_contexto)
-
-    return HttpResponse(documento)
-
-
 def cursos(request):
-    return render(request, "AppCoder/cursos.html")
+    cursos = Curso.objects.all()
+    return render(request, "AppCoder/cursos.html", {"cursos": cursos})
 
 
 def entregables(request):
-    return render(request, "AppCoder/entregables.html")
+    entregables = Entregable.objects.all()
+    return render(request, "AppCoder/entregables.html", {"entregables": entregables})
 
 
 def estudiantes(request):
-    return render(request, "AppCoder/estudiantes.html")
+    estudiantes = Estudiante.objects.all()
+    return render(request, "AppCoder/estudiantes.html", {"estudiantes": estudiantes})
 
 
 def profesores(request):
-    return render(request, "AppCoder/profesores.html")
+    profesores = Profesor.objects.all()
+    return render(request, "AppCoder/profesores.html", {"profesores": profesores})
 
 
 # Les dejo una plantilla genérica con bootstrap
@@ -60,7 +44,7 @@ def crear_curso(request):
         # es una función y se llama con () al final.
         if mi_formulario.is_valid():
             informacion = mi_formulario.cleaned_data
-            curso = Curso(nombre=informacion["curso"], comision=informacion["camada"])
+            curso = Curso(nombre=informacion["nombre"], comision=informacion["comision"])
             curso.save()
             return redirect("Cursos")
         else:
@@ -82,3 +66,33 @@ def buscar_curso(request):
         )
 
     return render(request, "AppCoder/buscarCurso.html")
+
+
+def eliminar_curso(request, nombre_curso):
+    # Uso Modelo.objects.get(campo=valor) para obtener una instancia de la BD
+    curso = Curso.objects.get(nombre=nombre_curso)
+    curso.delete()
+    # Vuelvo a la lista
+    return redirect("Cursos")
+
+
+def editar_curso(request, nombre_curso):
+    curso = Curso.objects.get(nombre=nombre_curso)
+
+    if request.method == "POST":
+        mi_form = FormCurso(request.POST)
+        if mi_form.is_valid():
+            info = mi_form.cleaned_data
+
+            curso.nombre = info["nombre"]
+            curso.comision = info["comision"]
+
+            curso.save()
+            return redirect("Cursos")
+        else:
+            # Hubo algún error
+            ...
+
+    print(curso.nombre)
+    mi_form = FormCurso(initial={"nombre": curso.nombre, "comision": curso.comision})
+    return render(request, "AppCoder/formCurso.html", {"form": mi_form})

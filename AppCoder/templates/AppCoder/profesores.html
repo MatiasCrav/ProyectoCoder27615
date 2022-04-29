@@ -5,4 +5,18 @@
     <h1 class="text-center">
         Profesores
     </h1>
+
+    <div class="my-4 col-md-7 col-lg-6 mx-auto">
+        <div class="mt-3 card bg-light p-3">
+            
+            {% if not profesores %}            
+                <h5>Aca eventualmente mostraré los profesores</h5>
+            {% endif %}
+                
+            {% for profesore in profesores %}
+                <h5>{{ profesore }}</h5>
+            {% endfor %}
+            
+        </div>
+    </div>
 {% endblock contenido %}
