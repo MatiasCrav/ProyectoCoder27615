@@ -42,7 +42,7 @@ class Curso(models.Model):
 class Entregable(models.Model):
     nombre = models.CharField(max_length=200)
     fecha = models.DateField()
-    entrgado = models.BooleanField()
+    entregado = models.BooleanField()
 
     def __str__(self):
         return f"Entregable {self.nombre}"
