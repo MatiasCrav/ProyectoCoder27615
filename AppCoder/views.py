@@ -7,6 +7,8 @@ from .forms import FormCurso
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
 
 
 def inicio(request):
@@ -33,7 +35,9 @@ def crear_curso(request):
         # es una función y se llama con () al final.
         if mi_formulario.is_valid():
             informacion = mi_formulario.cleaned_data
-            curso = Curso(nombre=informacion["nombre"], comision=informacion["comision"])
+            curso = Curso(
+                nombre=informacion["nombre"], comision=informacion["comision"]
+            )
             curso.save()
             return redirect("Cursos")
         else:
@@ -137,3 +141,26 @@ def estudiantes(request):
 def profesores(request):
     profesores = Profesor.objects.all()
     return render(request, "AppCoder/profesores.html", {"profesores": profesores})
+
+
+def login_request(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+
+        if form.is_valid():
+            usuario = form.cleaned_data.get("username")
+            contra = form.cleaned_data.get("password")
+            user = authenticate(username=usuario, password=contra)
+            if user:
+                login(request, user)
+                return redirect("Inicio")
+
+    # Si no me enviaron datos o me los enviaron mal voy al form
+    form = AuthenticationForm()
+    return render(request, "AppCoder/login.html", {"form": form})
+
+
+# Puedo usar la funcion logout() de django.contrib.auth para cerrar sesión
+def logout_request(request):
+    logout(request)
+    return redirect("Inicio")
