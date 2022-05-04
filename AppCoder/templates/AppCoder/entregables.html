@@ -9,11 +9,11 @@
     <div class="my-4 col-md-7 col-lg-6 mx-auto">
         <div class="mt-3 card bg-light p-3">
             
-            {% if not entregables %}            
+            {% if not entregable_list %}            
                 <h5>Aca eventualmente mostraré los entregables</h5>
             {% endif %}
                 
-            {% for entregable in entregables %}
+            {% for entregable in entregable_list %}
                 <h5>{{ entregable }}</h5>
             {% endfor %}
             

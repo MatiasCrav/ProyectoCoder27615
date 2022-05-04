@@ -6,12 +6,13 @@ from AppCoder import views
 urlpatterns = [
     path("", views.inicio, name="Inicio"),
     path("cursos/", views.cursos, name="Cursos"),
-    path("entregables/", views.entregables, name="Entregables"),
+    path("entregables/", views.ListarEntregables.as_view(), name="Entregables"),
     path("estudiantes/", views.estudiantes, name="Estudiantes"),
     path("profesores/", views.profesores, name="Profesores"),
     path("plantilla/", views.plantilla),
+    path("ver_curso/<id>", views.ver_curso, name="VerCurso"),
     path("crear_curso/", views.crear_curso, name="CrearCurso"),
     path("buscar_curso/", views.buscar_curso, name="BuscarCurso"),
-    path("eliminar_curso/<nombre_curso>", views.eliminar_curso, name="EliminarCurso"),
-    path("editar_curso/<nombre_curso>", views.editar_curso, name="EditarCurso"),
+    path("eliminar_curso/<id>", views.eliminar_curso, name="EliminarCurso"),
+    path("editar_curso/<id>", views.editar_curso, name="EditarCurso"),
 ]

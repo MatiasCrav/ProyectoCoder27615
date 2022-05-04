@@ -16,13 +16,17 @@
                 
             {% for curso in cursos %}
                 <div class="d-flex justify-content-between my-2 align-items-center">
-                    <h5 class="m-0">{{ curso }}</h5>
+                    <h5 class="m-0">
+                        <a href="{% url 'VerCurso' curso.id %}">
+                          {{ curso }}
+                        </a>
+                    </h5>
                     <div>
-                        <a href="{% url 'EditarCurso' curso.nombre %}"
+                        <a href="{% url 'EditarCurso' curso.id %}"
                            class="btn btn-warning">
                             Editar
                         </a>
-                        <a href="{% url 'EliminarCurso' curso.nombre %}"
+                        <a href="{% url 'EliminarCurso' curso.id %}"
                            class="btn btn-danger">
                             Borrar
                         </a>
