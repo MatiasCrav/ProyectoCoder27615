@@ -15,4 +15,8 @@ urlpatterns = [
     path("buscar_curso/", views.buscar_curso, name="BuscarCurso"),
     path("eliminar_curso/<id>", views.eliminar_curso, name="EliminarCurso"),
     path("editar_curso/<id>", views.editar_curso, name="EditarCurso"),
+    path("ver_entregable/<pk>", views.VerEntregable.as_view(), name="VerEntregable"),
+    path("editar_entregable/<pk>", views.EditarEntregable.as_view(), name="EditarEntregable"),
+    path("crear_entregable/", views.CrearEntregable.as_view(), name="CrearEntregable"),
+    path("eliminar_entregable/<pk>", views.EliminarEntregable.as_view(), name="EliminarEntregable"),
 ]

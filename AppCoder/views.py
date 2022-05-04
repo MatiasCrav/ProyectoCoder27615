@@ -103,6 +103,27 @@ class VerEntregable(DetailView):
     template_name = "AppCoder/ver_entregable.html"
 
 
+class EditarEntregable(UpdateView):
+    model = Entregable
+    success_url = "/AppCoder/entregables/"
+    fields = ["nombre", "fecha", "entregado"]
+    # También le podemos decir un template en específico
+    template_name = "AppCoder/formEntregable.html"
+
+
+class CrearEntregable(CreateView):
+    model = Entregable
+    success_url = "/AppCoder/entregables/"
+    fields = ["nombre", "fecha", "entregado"]
+    # También le podemos decir un template en específico
+    template_name = "AppCoder/formEntregable.html"
+
+
+class EliminarEntregable(DeleteView):
+    model = Entregable
+    success_url = "/AppCoder/entregables/"
+
+
 def entregables(request):
     entregables = Entregable.objects.all()
     return render(request, "AppCoder/entregables.html", {"entregables": entregables})
