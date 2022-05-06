@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from AppCoder.models import Curso, Estudiante, Profesor, Entregable
-from .forms import FormCurso, FormRegistrarse
+from .forms import FormCurso, FormRegistrarse, FormEditarUsuario
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -193,6 +193,34 @@ def login_request(request):
 
 
 # Puedo usar la funcion logout() de django.contrib.auth para cerrar sesión
+@login_required
 def logout_request(request):
     logout(request)
     return redirect("Inicio")
+
+
+@login_required
+def editar_usuario(request):
+    user = request.user
+    if request.method == "POST":
+        form = FormEditarUsuario(request.POST)
+        if form.is_valid():
+            info = form.clean_data
+            user.username = info["username"]
+            user.email = info["email"]
+            user.password1 = info["password1"]
+            user.password2 = info["password2"]
+            user.save()
+
+            # Vuelvo a inicio
+            return redirect("Inicio")
+        else:
+            error = True
+
+    else:
+        error = False
+        form = FormEditarUsuario(
+            initial={"username": user.username, "email": user.email}
+        )
+
+    return render(request, "AppCoder/formUsuario.html", {"form": form, "error": error})

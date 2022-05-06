@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Heredamos de models.Model para que la clase sea un "modelo" y se use para crear una
@@ -12,6 +13,7 @@ class Profesor(models.Model):
     # EmailField = campo de email
     email = models.EmailField(max_length=200)
     # Hay más tipos de campos: Integer (números enteros), Date (fecha), etc...
+
 
     def __str__(self):
         return f"[Profe] {self.nombre} {self.apellido}"
@@ -46,3 +48,8 @@ class Entregable(models.Model):
 
     def __str__(self):
         return f"Entregable {self.nombre}"
+
+
+class Avatar(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to="avatares", null=True, blank=True)
